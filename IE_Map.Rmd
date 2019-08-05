@@ -1,0 +1,26 @@
+---
+title: "Inland Empire map"
+author: "Matt Heimdahl"
+date: "8/4/2019"
+output: html_document
+---
+
+## Inland Empire Region
+Key cities in the Inland Empire Region of Southern California by population
+
+```{r, echo = FALSE}
+library(leaflet)
+ie_cities <- data.frame(name = c("Riverside", "San Bernardino", "Ontario", "Redlands",
+                                 "Chino", "Corona", "Temecula", "Moreno Valley"),
+                        pop = c(327728, 216995, 175841, 71554,
+                                89797, 167836, 114327, 207226),
+                        lat = c(33.9806, 34.1083, 34.0633, 34.0556,
+                                34.0122, 33.8753, 33.4936, 33.9425),
+                        long = c(-117.3755, -117.2898, -117.6509, -117.1825,
+                                 -117.6889, -117.5664, -117.1484, -117.2297))
+
+ie_cities %>%
+        leaflet() %>%
+        addTiles() %>%
+        addCircles(weight = 1, radius = sqrt(ie_cities$pop) * 20)
+```
